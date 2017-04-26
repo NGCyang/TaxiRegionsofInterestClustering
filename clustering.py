@@ -5,9 +5,10 @@ from sklearn import cluster
 import matplotlib.pyplot as plt
 from sets import Set
 
-pickup_df = pd.read_csv('yellow_tripdata_2015-12.csv')
 
-pickup_df = pickup_df[(pickup_df.pickup_latitude != 0) & (pickup_df.pickup_longitude != 0)]
+pickup_df = pd.read_csv('cleaned_data.csv', nrows=1000000)
+
+#pickup_df = pickup_df[(pickup_df.pickup_latitude != 0) & (pickup_df.pickup_longitude != 0)]
 
 test = pickup_df.ix[:,['pickup_longitude', 'pickup_latitude']]
 
@@ -50,16 +51,16 @@ regions = pd.DataFrame(columns=columns)
 
 for label in label_set:
     if label != -1:
+        #time.sleep(1000)
         cluster_df = test[test.cluster == label]
         mean_lat = np.mean(cluster_df.pickup_latitude)
         mean_lng = np.mean(cluster_df.pickup_longitude)
         # print mean_lat
         # print mean_lng
         # print cluster_df.size
-
         regions = regions.append(pd.DataFrame([[mean_lng, mean_lat, cluster_df.size, label]], columns=columns), ignore_index=True)
 
-print regions
+#print regions
 
 regions.to_csv('regions.csv')
 
