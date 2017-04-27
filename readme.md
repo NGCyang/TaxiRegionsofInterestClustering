@@ -25,3 +25,7 @@ In this case I chosen the number of 50.
 3. Training each small area and calculate the center coordinate of each cluster generated. Then combine all the data to final result.
 
 4. Visualizing the regions of interests of green cab on map using d3.js and Mapbox.
+
+
+## Visualizing
+![Visualizing](shttps://github.com/NGCyang/TaxiRegionsofInterestClustering/blob/master/visualizing.png)
