@@ -28,4 +28,4 @@ In this case I chosen the number of 50.
 
 
 ## Visualizing
-![Visualizing](shttps://github.com/NGCyang/TaxiRegionsofInterestClustering/blob/master/visualizing.png)
+![Visualizing](TaxiRegionsofInterestClustering/visualizing.png)
