@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NYC Taxi Regions of Interest</title>
+
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+  <div id='map' style='width: 1000px; height: 600px;'></div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibmdjeWFuZyIsImEiOiJjajF6ZjNieWcwMHgwMzRuNWwyOTgwbm93In0.UuafEERjD24kS9R06Egonw';
+
+    var map = new mapboxgl.Map({
+      container: 'map',
+      center: [-73.921425, 40.746338],
+      zoom: 13,
+      style: 'mapbox://styles/mapbox/light-v9',
+      hash: true
+    });
+
+  d3.json("green_regions.json", function(err, data) {
+        if (err) throw err;
+
+        console.log(data);
+        map.addSource('regions', {
+                'type': 'geojson',
+                'data': data
+            });
+          map.addLayer({
+              'id': 'regions',
+              'type': 'circle',
+              'source': 'regions',
+              'layout': {
+                  'visibility': 'visible'
+              },
+              'paint': {
+                  'circle-radius': 8,
+                  'circle-color': 'rgba(55,148,179,1)',
+                  'circle-opacity': 0.8
+              }
+          });
+      });
+
+      map.on('click', 'regions', function (e) {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.size)
+            .addTo(map);
+          });
+
+
+  </script>
+
+</body>
+</html>
